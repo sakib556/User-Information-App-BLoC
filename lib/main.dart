@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Material Apps',
+        title: 'Material App',
         theme: ThemeData.light(),
         home: const HomeScreen());
   }
