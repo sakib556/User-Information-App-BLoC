@@ -13,8 +13,11 @@ class UserApi {
     Response response = await _dio
         .get("https://reqres.in/api/users", queryParameters: {"page": page});
     
+    //we can also use headers with options parameter
     //Response response = await _dio
-    //  .get( "https://reqres.in/api/users",options: Options(headers: {}) , queryParameters: {"page": page}); 
+    // .get( "https://reqres.in/api/users",
+    //        options: Options(headers: {}) , 
+    //        queryParameters: {"page": page}); 
 
     return (response.data["data"] as List)
         .map((e) => UserModel.fromJson(e))
