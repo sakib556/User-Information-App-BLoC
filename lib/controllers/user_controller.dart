@@ -12,7 +12,7 @@ class UserController extends GetxController {
 
   Future<void> loadUsers() async {
     _loading = true;
-    final data = await UserApi.instance.getUser(1);
+    final data = await UserApi.getUser(1);
     _users = data;
     _loading = false;
     update(["users"]);
