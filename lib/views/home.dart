@@ -9,15 +9,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               ElevatedButton(
                 onPressed: () {
-                  Get.to(const UserScreen());
+                  Get.to(UserScreen());
                 },
                 child: const Text("Users"),
               ),
@@ -27,10 +27,10 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: const Text("Others"),
               )
-              ],
-            ),
-            ),
+            ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }

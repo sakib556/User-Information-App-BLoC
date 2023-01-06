@@ -1,16 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:get/get.dart';
+import 'package:test_rest_api_flutter/api/user_api.dart';
 import 'package:test_rest_api_flutter/block/user/user_event.dart';
 import 'package:test_rest_api_flutter/block/user/user_state.dart';
 
-class DataBloc extends Bloc<UserEvent, UserState> {
-  Repo repo = Get.put(Repo());
+class UserBloc extends Bloc<UserEvent, UserState> {
+  UserApi repo = Get.put(UserApi());
   var api = [].obs;
-  DataBloc(this.repo) : super(UserInitialState()) {
+  UserBloc(this.repo) : super(UserInitialState()) {
     on<UserEvent>((event, emit) async {
       if (event is LoadUserEvent) {
         emit(UserLoadingState());
-        var apiValue = (await Repo.getData())?.data!.products.results;
+        var apiValue = (await UserApi.getAllUser())?.userData;
         if (apiValue == null) {
           emit(UserErrorState());
         } else {

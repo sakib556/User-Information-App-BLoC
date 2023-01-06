@@ -19,10 +19,10 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(user.avatar!),
+                  backgroundImage: NetworkImage(user.avatar),
                 ),
                 const SizedBox(height: 10),
-                Text("${user.firstName!} ${user.lastName!}")
+                Text("${user.firstName} ${user.lastName}")
               ],
             ),
           ),
