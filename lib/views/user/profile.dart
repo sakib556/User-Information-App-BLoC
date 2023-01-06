@@ -7,7 +7,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserModel user = Get.arguments as UserModel;
+    Data user = Get.arguments as Data;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Profile Page"),
