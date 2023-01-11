@@ -26,6 +26,27 @@ class UserScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is UserLoadedState) {
+            // return  Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: ListView(
+            //     physics: const AlwaysScrollableScrollPhysics(),
+            //     children: [
+            //       Center(
+            //         child: Container(
+            //           color: Colors.yellow,
+            //           height: 20,
+            //           child: Text("data")),
+            //       ),
+            //       Container(
+            //         color: Colors.yellow,
+            //         height: 20,
+            //         child: Text("data")),
+            //       Container(
+            //         color: Colors.yellow,
+            //         height: 20,
+            //         child: Text("data")),
+            //   ],),
+            // );
             return UserView(state.userList);
           } else if (state is UserErrorState) {
             return const Center(
@@ -41,7 +62,8 @@ class UserScreen extends StatelessWidget {
   }
 
   Widget UserView(List<UserData> userList) {
-    return Expanded(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: userList
             .map((user) => InkWell(
