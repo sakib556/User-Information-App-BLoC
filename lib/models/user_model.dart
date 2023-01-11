@@ -12,7 +12,7 @@ class UserModel {
     int perPage;
     int total;
     int totalPages;
-    List<Data> userData;
+    List<UserData> userData;
     Support support;
 
     factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
@@ -20,7 +20,7 @@ class UserModel {
         perPage: json["per_page"]as int ,
         total: json["total"]as int ,
         totalPages: json["total_pages"]as int ,
-        userData: List<Data>.from(json["data"].map((x) => Data.fromMap(x))),
+        userData: List<UserData>.from(json["data"].map((x) => UserData.fromMap(x))),
         support: Support.fromMap(json["support"]),
     );
 
@@ -34,8 +34,8 @@ class UserModel {
     };
 }
 
-class Data {
-    Data({
+class UserData {
+    UserData({
         required this.id,
         required this.email,
         required this.firstName,
@@ -49,7 +49,7 @@ class Data {
     String lastName;
     String avatar;
 
-    factory Data.fromMap(Map<String, dynamic> json) => Data(
+    factory UserData.fromMap(Map<String, dynamic> json) => UserData(
         id: json["id"],
         email: json["email"],
         firstName: json["first_name"],

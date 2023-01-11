@@ -7,8 +7,10 @@ class UserRepository {
   static var loginUrl = '$mainUrl/api/login';
   static var allUserUrl = '$mainUrl/api/users?page=2';
   static var singleUserUrl = '$mainUrl/api/users';
+
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   static final Dio _dio = Dio();
+
   static Future<UserModel?> getAllUser() async {
     Response response = await _dio.get(allUserUrl);
     if (response.statusCode != 200) {
@@ -20,7 +22,7 @@ class UserRepository {
     }
   }
 
-  static Future<List<Data>> getUser(int page) async {
+  static Future<List<UserData>> getUser(int page) async {
     final dio = Dio();
     Response response =
         await dio.get(singleUserUrl, queryParameters: {"page": page});
@@ -28,7 +30,7 @@ class UserRepository {
       throw Exception();
     } else {
       print(response.data);
-      return List<Data>.from(response.data.map((x) => x));
+      return List<UserData>.from(response.data.map((x) => x));
     }
   }
 

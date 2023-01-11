@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test_rest_api_flutter/block/user/user_block.dart';
@@ -10,11 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 import 'package:test_rest_api_flutter/views/user/profile.dart';
 
-// ignore: must_be_immutable
 class UserScreen extends StatelessWidget {
-  UserScreen({Key? key}) : super(key: key);
+  const UserScreen({Key? key}) : super(key: key);
 
-  UserController controller = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +27,7 @@ class UserScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is UserLoadedState) {
-            return UserView();
+            return UserView(state.userList);
           } else if (state is UserErrorState) {
             return const Center(
               child: Text("Something went wrong"),
@@ -45,27 +41,27 @@ class UserScreen extends StatelessWidget {
     );
   }
 
-  Widget UserView() {
-    return Obx(() => Center(
-        child: ListView.builder(
-            itemCount: controller.userList.length,
-            itemBuilder: (context, int index) {
-              final user = controller.userList[index] as Data;
-              return InkWell(
-                onTap: () {
-                  Get.to(const Profile(), arguments: user);
-                },
-                child: ListTile(
-                  trailing: CircleAvatar(
-                    radius: 50,
-                    child: Image.network(user.avatar),
+  Widget UserView(List<UserData> userList) {
+    return Expanded(
+      child: ListView(
+        children: userList
+            .map((user) => InkWell(
+                  onTap: () {
+                    Get.to(const Profile(), arguments: userList);
+                  },
+                  child: ListTile(
+                    trailing: CircleAvatar(
+                      radius: 50,
+                      child: Image.network(user.avatar),
+                    ),
+                    title: Text(user.firstName),
+                    subtitle: Text(
+                      user.lastName,
+                    ),
                   ),
-                  title: Text(user.firstName),
-                  subtitle: Text(
-                    user.lastName,
-                  ),
-                ),
-              );
-            })));
+                ))
+            .toList(),
+      ),
+    );
   }
 }
