@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
+class UserProfileScreen extends StatelessWidget {
+  const UserProfileScreen({Key? key, required this.user}) : super(key: key);
+  final UserData user;
+  static const id = "user_profile_screen";
   @override
   Widget build(BuildContext context) {
-    UserData user = Get.arguments as UserData;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Profile Page"),

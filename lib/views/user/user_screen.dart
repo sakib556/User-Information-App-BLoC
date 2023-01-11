@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:test_rest_api_flutter/block/user/user_block.dart';
 import 'package:test_rest_api_flutter/block/user/user_event.dart';
 import 'package:test_rest_api_flutter/block/user/user_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
-import 'package:test_rest_api_flutter/views/user/profile.dart';
+import 'package:test_rest_api_flutter/services/app_router.dart';
+import 'package:test_rest_api_flutter/views/user/user_profile_screen.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -26,28 +26,7 @@ class UserScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is UserLoadedState) {
-            // return  Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ListView(
-            //     physics: const AlwaysScrollableScrollPhysics(),
-            //     children: [
-            //       Center(
-            //         child: Container(
-            //           color: Colors.yellow,
-            //           height: 20,
-            //           child: Text("data")),
-            //       ),
-            //       Container(
-            //         color: Colors.yellow,
-            //         height: 20,
-            //         child: Text("data")),
-            //       Container(
-            //         color: Colors.yellow,
-            //         height: 20,
-            //         child: Text("data")),
-            //   ],),
-            // );
-            return UserView(state.userList);
+            return userView(state.userList, context);
           } else if (state is UserErrorState) {
             return const Center(
               child: Text("Something went wrong"),
@@ -61,14 +40,17 @@ class UserScreen extends StatelessWidget {
     );
   }
 
-  Widget UserView(List<UserData> userList) {
+  Widget userView(List<UserData> userList, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: userList
             .map((user) => InkWell(
                   onTap: () {
-                    Get.to(const Profile(), arguments: userList);
+                    AppRouter.route(context,UserProfileScreen(user: user));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (_) => UserProfileScreen(user: user)));
+                    // Get.to(const Profile(), arguments: userList);
                   },
                   child: ListTile(
                     trailing: CircleAvatar(

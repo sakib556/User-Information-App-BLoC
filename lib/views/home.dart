@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:test_rest_api_flutter/services/app_router.dart';
 import 'package:test_rest_api_flutter/views/user/user_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,13 +17,12 @@ class HomeScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Get.to(UserScreen());
+                  AppRouter.route(context, const UserScreen());
                 },
                 child: const Text("Users"),
               ),
               ElevatedButton(
                 onPressed: () {
-                  //Get.to(const UserScreen());
                 },
                 child: const Text("Others"),
               )
