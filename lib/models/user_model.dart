@@ -1,10 +1,3 @@
-
-import 'dart:convert';
-
-UserModel userModelFromMap(String str) => UserModel.fromMap(json.decode(str));
-
-String userModelToMap(UserModel data) => json.encode(data.toMap());
-
 class UserModel {
     UserModel({
         required this.page,

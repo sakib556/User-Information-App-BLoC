@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:test_rest_api_flutter/api/user_api.dart';
+import 'package:test_rest_api_flutter/repository/user_repository.dart';
 
 class UserController extends GetxController {
   var isLoading = true.obs;
@@ -14,7 +14,7 @@ class UserController extends GetxController {
   void fetch() async {
     try {
       isLoading(true);
-      var users = (await UserApi.getAllUser())?.userData;
+      var users = (await UserRepository.getAllUser())?.userData;
       if (users != null) {
         Rx(userList.value = users);
       }
