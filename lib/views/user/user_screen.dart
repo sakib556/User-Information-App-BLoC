@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:test_rest_api_flutter/block/user/user_block.dart';
 import 'package:test_rest_api_flutter/block/user/user_event.dart';
 import 'package:test_rest_api_flutter/block/user/user_state.dart';
-import 'package:test_rest_api_flutter/controllers/user_controller.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 import 'package:test_rest_api_flutter/views/user/profile.dart';
