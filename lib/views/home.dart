@@ -22,8 +22,7 @@ class HomeScreen extends StatelessWidget {
                 child: const Text("Users"),
               ),
               ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: const Text("Others"),
               )
             ],

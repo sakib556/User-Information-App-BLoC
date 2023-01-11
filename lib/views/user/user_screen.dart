@@ -47,10 +47,7 @@ class UserScreen extends StatelessWidget {
         children: userList
             .map((user) => InkWell(
                   onTap: () {
-                    AppRouter.route(context,UserProfileScreen(user: user));
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (_) => UserProfileScreen(user: user)));
-                    // Get.to(const Profile(), arguments: userList);
+                    AppRouter.route(context, UserProfileScreen(user: user));
                   },
                   child: ListTile(
                     trailing: CircleAvatar(
