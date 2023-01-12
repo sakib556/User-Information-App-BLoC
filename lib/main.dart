@@ -7,15 +7,16 @@ import 'package:test_rest_api_flutter/views/home.dart';
 
 void main() => runApp(MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(),
+        BlocProvider<AuthenticationBloc>(
+          create: (context) => AuthenticationBloc(userRepository: UserRepository()),
         ),
         BlocProvider<UserBloc>(
           create: (context) => UserBloc(UserRepository()),
         ),
       ],
       child: const MyApp(),
-    ));
+    )
+    );
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
