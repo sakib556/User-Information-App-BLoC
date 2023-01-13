@@ -11,7 +11,8 @@ void main() => runApp(MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
           create: (context) =>
-              AuthenticationBloc(userRepository: UserRepository())..add(AppStarted()),
+              AuthenticationBloc(userRepository: UserRepository())
+                ..add(AppStarted()),
         ),
         BlocProvider<UserBloc>(
           create: (context) => UserBloc(UserRepository()),
@@ -56,11 +57,11 @@ class MyApp extends StatelessWidget {
                     SizedBox(
                       height: 25.0,
                       width: 25.0,
-                      child:  CircularProgressIndicator(
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(AppColors.mainColor),
-                      strokeWidth: 4.0,
-                    ),
+                      child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(AppColors.mainColor),
+                        strokeWidth: 4.0,
+                      ),
                     )
                   ],
                 ),
@@ -78,8 +79,7 @@ class MyApp extends StatelessWidget {
                   SizedBox(
                     height: 25.0,
                     width: 25.0,
-                    child: 
-                    CircularProgressIndicator(
+                    child: CircularProgressIndicator(
                       valueColor:
                           AlwaysStoppedAnimation<Color>(AppColors.mainColor),
                       strokeWidth: 4.0,

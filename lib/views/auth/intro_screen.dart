@@ -10,7 +10,7 @@ class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key, required this.userRepository}) : super(key: key);
 
   @override
-   State<IntroScreen> createState() => _IntroScreenState();
+  State<IntroScreen> createState() => _IntroScreenState();
 }
 
 class _IntroScreenState extends State<IntroScreen> {
@@ -21,7 +21,6 @@ class _IntroScreenState extends State<IntroScreen> {
     });
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return clicked
@@ -54,4 +53,3 @@ class _IntroScreenState extends State<IntroScreen> {
           );
   }
 }
-
