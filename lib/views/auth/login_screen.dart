@@ -7,6 +7,8 @@ class LoginScreen extends StatelessWidget {
   final UserRepository userRepository;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Scaffold(
+      body: 
+      Center(child: Text("login screen"),));
   }
 }
