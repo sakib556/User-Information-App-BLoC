@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:test_rest_api_flutter/repository/user_repository.dart';
 import 'auth.dart';
@@ -8,34 +7,26 @@ class AuthenticationBloc
   final UserRepository userRepository;
 
   AuthenticationBloc({required this.userRepository})
-      : super(AuthenticationUninitialized());
-
-  @override
-  AuthenticationState get initialState => AuthenticationUninitialized();
-
-  @override
-  Stream<AuthenticationState> mapEventToState(
-    AuthenticationEvent event,
-  ) async* {
-    if (event is AppStarted) {
+      : super(AuthenticationUninitialized()) {
+    on<AppStarted>((event, emit) async {
       final bool hasToken = await userRepository.hasToken();
       if (hasToken) {
-        yield AuthenticationAuthenticated();
+        emit(AuthenticationAuthenticated());
       } else {
-        yield AuthenticationUnauthenticated();
+        emit(AuthenticationUnauthenticated());
       }
-    }
-
-    if (event is LoggedIn) {
-      yield AuthenticationLoading();
+    });
+    on<LoggedIn>((event, emit) async {
+      emit(AuthenticationLoading());
       await userRepository.persistToken(event.token);
-      yield AuthenticationAuthenticated();
-    }
-
-    if (event is LoggedOut) {
-      yield AuthenticationLoading();
+      emit(AuthenticationAuthenticated());
+    });
+    on<LoggedOut>((event, emit) async {
+      emit (AuthenticationLoading());
       await userRepository.deleteToken();
-      yield AuthenticationUnauthenticated();
-    }
+      emit (AuthenticationUnauthenticated());
+    });
   }
+
+  
 }
