@@ -41,65 +41,65 @@ class _LoginFormState extends State<LoginForm> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 20.0, left: 20.0, top: 80.0),
+          return Container(
+            alignment: Alignment.topCenter,
+            padding: const EdgeInsets.all(10.0),
+            // color: Colors.yellow,
             child: Form(
-              child: Container(
-                alignment: Alignment.center,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      loginTitle(),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      emailTextField(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      passwordTextField(),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: forgotPasswordBtn(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0, bottom: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            SizedBox(
-                                height: 45,
-                                child: state is LoginLoading
-                                    ? activityIndicator()
-                                    : loginBtn(_onLoginButtonPressed())),
-                          ],
-                        ),
-                      ),
-                      orConnectTitle(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          fbLoginBtn(() {}),
-                          googleLoginBtn(),
+              child: SingleChildScrollView(
+                
+                child: Column(
+                  children: [
+                    loginTitle(),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    emailTextField(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    passwordTextField(),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: forgotPasswordBtn(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30.0, bottom: 20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          SizedBox(
+                              height: 45,
+                              child: state is LoginLoading
+                                  ? activityIndicator()
+                                  : loginBtn(_onLoginButtonPressed)
+                                  ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 40.0,
-                      ),
-                      Expanded(
-                        child: registerBtn(() {}),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      )
-                    ],
-                  ),
+                    ),
+                    orConnectTitle(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        fbLoginBtn(() {}),
+                        googleLoginBtn(),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40.0,
+                    ),
+                    registerBtn(() {}),
+                    const SizedBox(
+                      height: 20.0,
+                    )
+                  
+                  ],
                 ),
               ),
             ),
@@ -141,7 +141,7 @@ class _LoginFormState extends State<LoginForm> {
           color: AppColors.titleColor,
           fontWeight: FontWeight.bold),
       controller: _usernameController,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.email_outlined, color: Colors.black26),
         enabledBorder: OutlineInputBorder(
@@ -168,6 +168,7 @@ class _LoginFormState extends State<LoginForm> {
           color: AppColors.titleColor,
           fontWeight: FontWeight.bold),
       controller: _passwordController,
+      keyboardType: TextInputType.visiblePassword,
       decoration: InputDecoration(
         fillColor: Colors.white,
         prefixIcon: const Icon(
