@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:test_rest_api_flutter/models/singleton.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  const UserProfileScreen({Key? key, required this.user}) : super(key: key);
-  final UserData user;
+  const UserProfileScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final userData = getIt<UserData>();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Profile Page"),
@@ -17,10 +19,10 @@ class UserProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(user.avatar),
+                  backgroundImage: NetworkImage(userData.avatar),
                 ),
                 const SizedBox(height: 10),
-                Text("${user.firstName} ${user.lastName}")
+                Text("${userData.firstName} ${userData.lastName}")
               ],
             ),
           ),

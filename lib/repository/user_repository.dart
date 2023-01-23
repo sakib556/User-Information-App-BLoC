@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test_rest_api_flutter/models/singleton.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 
 class UserRepository {
@@ -18,6 +19,7 @@ class UserRepository {
     } else {
       print("The response is that \n${response.data}\n");
       // no need to decode , when we use dio package , its response returns the String,dynamic
+      getIt.registerSingleton<UserModel>(UserModel.fromMap(response.data));
       return UserModel.fromMap(response.data);
     }
   }

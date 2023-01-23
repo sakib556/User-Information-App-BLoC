@@ -3,6 +3,7 @@ import 'package:test_rest_api_flutter/block/user/user_block.dart';
 import 'package:test_rest_api_flutter/block/user/user_event.dart';
 import 'package:test_rest_api_flutter/block/user/user_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_rest_api_flutter/models/singleton.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 import 'package:test_rest_api_flutter/services/app_router.dart';
 import 'package:test_rest_api_flutter/views/user/user_profile_screen.dart';
@@ -47,7 +48,17 @@ class UserScreen extends StatelessWidget {
         children: userList
             .map((user) => InkWell(
                   onTap: () {
-                    AppRouter.route(context, UserProfileScreen(user: user));
+                    // if (getIt.isRegistered<UserData>() == false) {
+                    //   getIt.registerFactory<UserData>(() => user);
+                    //   print("1");
+                    // } else {
+                    //   print("2");
+                    //   getIt.unregister<UserData>();
+                    //   getIt.registerFactory<UserData>(() => user);
+                    // }
+
+                    getIt.registerFactory<UserData>(() => user);
+                    AppRouter.route(context, const UserProfileScreen());
                   },
                   child: ListTile(
                     trailing: CircleAvatar(

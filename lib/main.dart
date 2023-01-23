@@ -2,26 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_rest_api_flutter/block/auth/auth.dart';
 import 'package:test_rest_api_flutter/block/user/user.dart';
+import 'package:test_rest_api_flutter/models/singleton.dart';
 import 'package:test_rest_api_flutter/repository/user_repository.dart';
 import 'package:test_rest_api_flutter/views/auth/intro_screen.dart';
 import 'package:test_rest_api_flutter/views/home.dart';
 import 'package:test_rest_api_flutter/views/style/app_colors.dart';
 
-void main() => runApp(MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthenticationBloc>(
-          create: (context) =>
-              AuthenticationBloc(userRepository: UserRepository())
-                ..add(AppStarted()),
-        ),
-        BlocProvider<UserBloc>(
-          create: (context) => UserBloc(UserRepository()),
-        ),
-      ],
-      child: MyApp(
-        userRepository: UserRepository(),
+void main() {
+  setupSingleton();
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<AuthenticationBloc>(
+        create: (context) =>
+            AuthenticationBloc(userRepository: UserRepository())
+              ..add(AppStarted()),
       ),
-    ));
+      BlocProvider<UserBloc>(
+        create: (context) => UserBloc(UserRepository()),
+      ),
+    ],
+    child: MyApp(
+      userRepository: UserRepository(),
+    ),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   final UserRepository userRepository;
