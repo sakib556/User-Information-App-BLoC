@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_rest_api_flutter/models/singleton.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
 import 'package:test_rest_api_flutter/services/app_router.dart';
+import 'package:test_rest_api_flutter/views/user/user_form_screen.dart';
 import 'package:test_rest_api_flutter/views/user/user_profile_screen.dart';
 
 class UserScreen extends StatelessWidget {
@@ -44,34 +45,34 @@ class UserScreen extends StatelessWidget {
   Widget userView(List<UserData> userList, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView(
-        children: userList
-            .map((user) => InkWell(
-                  onTap: () {
-                    // if (getIt.isRegistered<UserData>() == false) {
-                    //   getIt.registerFactory<UserData>(() => user);
-                    //   print("1");
-                    // } else {
-                    //   print("2");
-                    //   getIt.unregister<UserData>();
-                    //   getIt.registerFactory<UserData>(() => user);
-                    // }
-
-                    getIt.registerFactory<UserData>(() => user);
-                    AppRouter.route(context, const UserProfileScreen());
-                  },
-                  child: ListTile(
-                    trailing: CircleAvatar(
-                      radius: 50,
-                      child: Image.network(user.avatar),
-                    ),
-                    title: Text(user.firstName),
-                    subtitle: Text(
-                      user.lastName,
-                    ),
-                  ),
-                ))
-            .toList(),
+      child: Column(
+        children: [
+          ElevatedButton(onPressed: () {
+            AppRouter.route(context, const UserFormScreen());
+          }, child: const Text("Add new user")),
+          Expanded(
+            child: ListView(
+              children: userList
+                  .map((user) => InkWell(
+                        onTap: () {
+                          getIt.registerFactory<UserData>(() => user);
+                          AppRouter.route(context, const UserProfileScreen());
+                        },
+                        child: ListTile(
+                          trailing: CircleAvatar(
+                            radius: 50,
+                            child: Image.network(user.avatar),
+                          ),
+                          title: Text(user.firstName),
+                          subtitle: Text(
+                            user.lastName,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

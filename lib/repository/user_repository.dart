@@ -2,18 +2,31 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:test_rest_api_flutter/models/singleton.dart';
 import 'package:test_rest_api_flutter/models/user_model.dart';
+import 'package:test_rest_api_flutter/repository/api_constants.dart';
 
 class UserRepository {
-  static String mainUrl = "https://reqres.in";
-  static var loginUrl = '$mainUrl/api/login';
-  static var allUserUrl = '$mainUrl/api/users?page=2';
-  static var singleUserUrl = '$mainUrl/api/users';
-
+  
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   static final Dio _dio = Dio();
 
+  static Future<String> createUser(String name, String title) async {
+    Response response = await _dio.post(
+      createUserUrl,
+      data: {"name": name, "job": title},
+    );
+    if (response.statusCode != 201) {
+      throw Exception();
+    } else {
+      print("The response is that \n${response.data}\n");
+      return response.data.toString();
+    }
+  }
+
   static Future<UserModel?> getAllUser() async {
-    Response response = await _dio.get(allUserUrl);
+    Response response = await _dio.get(
+      allUserUrl,
+    //  options: Options(responseType: ResponseType.stream),
+    );
     if (response.statusCode != 200) {
       throw Exception();
     } else {
